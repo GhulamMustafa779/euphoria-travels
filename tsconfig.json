@@ -18,8 +18,12 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/enum/*": ["libs/enums/*"],
+      "@/type/*": ["libs/types/*"],
+      "@/constant/*": ["libs/constants/*"],
     }
   },
   "include": [
