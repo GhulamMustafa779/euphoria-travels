@@ -12,8 +12,8 @@ const footerLinks: FooterLinksType[] = [
                 href: "/tours",
             },
             {
-                title: "Customizr Tour",
-                href: "/customizetour",
+                title: "Customize Tour",
+                href: "/custom-tour",
             },
         ]
     },
@@ -52,7 +52,7 @@ const FooterLinks = () => {
                             <h2 className='text-[16px] text-white font-bold uppercase'>
                                 {column.header}
                             </h2>
-                            <nav className="flex flex-col gap-1 mt-2">
+                            <nav className="flex flex-col gap-2 mt-3">
                                 {
                                     column.links?.map((link, index) => {
                                         return (

@@ -1,7 +1,9 @@
-import React from "react";
+import CustomizeTour from "@/components/pages/customizetour/CustomizeTour";
 
 const CutomizeTour = () => {
-	return <div>CutomizeTour</div>;
+	return <div>
+		<CustomizeTour />
+	</div>;
 };
 
 export default CutomizeTour;

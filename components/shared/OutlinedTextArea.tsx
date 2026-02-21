@@ -1,4 +1,5 @@
 import React from 'react'
+import ErrorText from '../ui/ErrorText';
 
 interface OutlinedTextAreaProps {
     value: string;
@@ -9,9 +10,12 @@ interface OutlinedTextAreaProps {
     error?: string;
 }
 
-const OutlinedTextArea = ({ rows = 3, value, name, placeholder, onChange }: OutlinedTextAreaProps) => {
+const OutlinedTextArea = ({ rows = 3, value, name, placeholder, error, onChange }: OutlinedTextAreaProps) => {
     return (
-        <textarea value={value} placeholder={placeholder} name={name} onChange={onChange} rows={rows} className='border border-indigo bg-transparent text-medium-grey text-[16px] rounded-[20px] px-[24px] py-[8px] min-w-[270px] w-full' />
+        <div className='flex flex-col gap-1  min-w-[270px] w-full'>
+            <textarea value={value} placeholder={placeholder} name={name} onChange={onChange} rows={rows} className={`border ${error ? 'border-red-500' : 'border-indigo'} bg-transparent text-medium-grey text-[16px] rounded-[20px] px-[24px] py-[8px] w-full`} />
+            {error && <ErrorText text={error} />}
+        </div>
     )
 }
 

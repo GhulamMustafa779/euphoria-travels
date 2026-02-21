@@ -56,7 +56,7 @@ const FAQs = () => {
     }
     return (
         <section className='my-[80px] flex flex-col items-center'>
-            <SectionTitle bgText='Questions' title='Frequesntly Ashed Questions' />
+            <SectionTitle bgText='Questions' title='Frequently Asked Questions' />
             <SubTitle text='We&apos;ve put together answers to the most commonly asked questions to help you plan with confidence. Whether you&apos;re looking for details about our services, booking process, or travel customization options, you&apos;ll find helpful information here. If you don&apos;t see what you&apos;re looking for, feel free to reach out—we&apos;re always happy to assist.' />
             <div className='max-w-[600px] w-full mt-5 flex flex-col gap-4 p-5 md:p-0'>
                 {
