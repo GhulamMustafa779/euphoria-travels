@@ -41,11 +41,11 @@ export async function POST(request: NextRequest) {
       body.email) as string;
     const emailSubject =
       subject ??
-      `Contact from ${body.firstName ?? } ${body.lastName ?? }`.trim() ??
+      `Contact from ${body.firstName ?? ""} ${body.lastName ?? ""}`.trim() ??
       "New contact form submission";
 
     const html = Object.entries(data)
-      .filter(([, v]) => v != null && String(v).trim() !== )
+      .filter(([, v]) => v != null && String(v).trim() !== "")
       .map(
         ([k, v]) =>
           `<p><strong>${k}:</strong> ${String(v).replace(/\n/g, "<br>")}</p>`,
