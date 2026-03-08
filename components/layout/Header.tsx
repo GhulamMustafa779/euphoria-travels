@@ -43,7 +43,6 @@ const NavItem = ({ item, index, active, setActive }: NavItemProps) => {
 const Header = () => {
 	const [active, setActive] = useState<number>(0)
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
 	const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
 	return (

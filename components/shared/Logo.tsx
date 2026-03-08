@@ -9,7 +9,7 @@ interface LogoProps {
 const Logo = ({ width = 70, height = 70 }: LogoProps) => {
     return (
         <Link href={'/'} className="cursor-pointer hover:scale-[105%]">
-            <Image src='/images/Logo.png' alt='Euphoria Travels' width={width} height={height} />
+            <Image src='/images/Logo.png' alt='Euphoria Travels' width={width} height={height} loading="eager" />
         </Link>
     )
 }

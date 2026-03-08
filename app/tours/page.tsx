@@ -3,7 +3,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import SubTitle from "@/components/ui/SubTitle";
 import Link from "next/link";
 
-const Tours = () => {
+const ToursPage = () => {
 	return (
 		<div className="my-[150px] flex flex-col items-center">
 			<SectionTitle bgText='Tours List' title='Find Your Tour' />
@@ -24,4 +24,4 @@ const Tours = () => {
 	);
 };
 
-export default Tours;
+export default ToursPage;
