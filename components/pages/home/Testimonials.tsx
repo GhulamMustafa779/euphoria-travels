@@ -41,9 +41,6 @@ const Testimonials = () => {
         <section className='flex flex-col items-center bg-indigo py-[75px] w-full p-[10px]'>
             <SectionTitle bgText='Testimonials' title='Words From Our Clients' bgColor={ColorEnum.BLOND} titleColor={ColorEnum.WHITE} />
             <SubTitle text='Discover what our travelers say about their journeys with us. Honest feedback that shows our commitment to great travel experiences.' textColor={ColorEnum.WHITE} />
-            <div className='max-w-[1100px] w-full mt-5'>
-                <UnderlineButton href='/tours' text="See All" textColor={ColorEnum.WHITE} />
-            </div>
             <div className='flex justify-center max-w-[1120px] flex-wrap gap-5 mt-5'>
                 {
                     testimonials.map((testimonial, index) => {

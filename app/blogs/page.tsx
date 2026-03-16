@@ -1,6 +1,5 @@
 import SectionTitle from "@/components/ui/SectionTitle";
 import SubTitle from "@/components/ui/SubTitle";
-import React from "react";
 
 const Blogs = () => {
 	return (

@@ -90,7 +90,8 @@ const Tour = async ({ params }: TourProps) => {
 						<Image src="/images/ayyun.jpeg" alt="Tour" width={500} height={500} className="w-full h-[400px] object-cover rounded-[24px]" />
 					</div>
 				</div>
-				<div>
+
+				<div className="w-full">
 					<h2 className="mb-4 text-[20px] md:text-[24px] font-bold text-indigo font-helvetica text-left">
 						Highlights
 					</h2>
@@ -101,6 +102,7 @@ const Tour = async ({ params }: TourProps) => {
 						<li><CheckCircle className="w-4 h-4 inline-block mr-2 text-green-500" />  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus</li>
 					</ul>
 				</div>
+
 				<div className="w-full">
 					<h2 className="mb-4 text-[20px] md:text-[24px] font-bold text-indigo font-helvetica text-left">
 						Gallery

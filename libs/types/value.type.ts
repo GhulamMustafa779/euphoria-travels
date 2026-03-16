@@ -1,7 +1,7 @@
 type ValueType = {
-    iconUrl: string,
-    title: string,
-    description: string
-}
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+};
 
-export default ValueType
+export default ValueType;

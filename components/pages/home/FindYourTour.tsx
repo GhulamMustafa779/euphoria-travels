@@ -9,7 +9,7 @@ const FindYourTour = () => {
     return (
         <section className='flex flex-col items-center bg-blond py-[75px] w-full p-[10px]'>
             <SectionTitle bgText='Packages' title='Find Your Tour' bgColor={ColorEnum.INDIGO} />
-            <SubTitle text='Explore our collection of dream destinations, carefully chosen to inspire your next journey and turn your travel dreams into reality.' />
+            <SubTitle text='Discover amazing destinations around the world with our expertly planned tours designed for comfort, adventure, and unforgettable memories' />
             <TourTags />
             <div className='max-w-[1100px] w-full mt-5'>
                 <UnderlineButton href='/tours' text="See All" />
