@@ -13,6 +13,7 @@ import { tourServices } from '@/libs/constants/tour-services.constant';
 import OutlinedTextArea from '@/components/shared/OutlinedTextArea';
 import OutlinedSelectDate from '@/components/ui/OutlinedSelectDate';
 import OutlinedMutliSelect from '@/components/ui/OutlinedMutliSelect';
+import OutlinedPhoneInput from '@/components/shared/OutlinedPhoneInput';
 
 type FormErrors = Partial<Record<keyof typeof initialFormData, string>>;
 
@@ -23,6 +24,8 @@ const initialFormData = {
     nationality: '',
     email: '',
     phone: '',
+    emergencyContactNumber: '',
+    insuranceNumber: '',
     startLocation: '',
     endLocation: '',
     currency: '',
@@ -38,6 +41,10 @@ const initialFormData = {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const NUMBER_REGEX = /^\d+$/;
+const toPayloadPhone = (value: string) => {
+    if (!value) return '';
+    return value.startsWith('+') ? value : `+${value}`;
+};
 
 const CustomizeTour = () => {
     const [isGroup, setIsGroup] = useState<boolean>(false);
@@ -57,6 +64,9 @@ const CustomizeTour = () => {
         else if (!EMAIL_REGEX.test(formData.email)) err.email = 'Please enter a valid email';
         if (!formData.phone?.trim()) err.phone = 'Phone number is required';
         else if (formData.phone.replace(/\D/g, '').length < 8) err.phone = 'Phone must be at least 8 digits';
+        if (!formData.emergencyContactNumber?.trim()) err.emergencyContactNumber = 'Emergency contact number is required';
+        else if (formData.emergencyContactNumber.replace(/\D/g, '').length < 8) err.emergencyContactNumber = 'Emergency contact must be at least 8 digits';
+        // if (!formData.insuranceNumber?.trim()) err.insuranceNumber = 'Insurance number is required';
 
         const hasServices = formData.selectedServices.length > 0 && formData.selectedServices.some(s => s?.trim() !== '');
         if (!hasServices) err.selectedServices = 'Please select at least one service';
@@ -94,7 +104,19 @@ const CustomizeTour = () => {
         if (errors.selectedServices) setErrors((prev) => ({ ...prev, selectedServices: undefined }));
     };
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handlePhoneChange = (name: string, value: string) => {
+        if (name !== 'phone' && name !== 'emergencyContactNumber') return;
+
+        setFormData((prev) => ({ ...prev, [name]: value }));
+
+        // `react-phone-input-2` can fire change events during internal formatting updates.
+        // Clear errors only after a reasonably valid phone length to avoid hiding errors too early.
+        if (errors[name] && value.replace(/\D/g, '').length >= 8) {
+            setErrors((prev) => ({ ...prev, [name]: undefined }));
+        }
+    };
+
+    const handleSubmit: NonNullable<React.ComponentProps<'form'>['onSubmit']> = async (e) => {
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) return;
@@ -108,7 +130,9 @@ const CustomizeTour = () => {
                 gender: formData.gender,
                 nationality: formData.nationality,
                 email: formData.email,
-                phone: formData.phone,
+                phone: toPayloadPhone(formData.phone),
+                emergencyContactNumber: toPayloadPhone(formData.emergencyContactNumber),
+                insuranceNumber: formData.insuranceNumber,
                 startLocation: formData.startLocation,
                 endLocation: formData.endLocation,
                 currency: formData.currency,
@@ -169,7 +193,32 @@ const CustomizeTour = () => {
                             <OutlinedSelectInput options={countries} value={formData.nationality} name='nationality' placeholder='Nationality' onChange={handleChange} error={errors.nationality} />
                         </div>
                         <OutlinedInput type='email' value={formData.email} name='email' placeholder='Email' onChange={handleChange} error={errors.email} />
-                        <OutlinedInput type='tel' value={formData.phone} name='phone' placeholder='Phone' onChange={handleChange} width='300px' error={errors.phone} />
+                        <div className='flex flex-col md:flex-row gap-[10px]'>
+                            <OutlinedPhoneInput
+                                value={formData.phone}
+                                name='phone'
+                                placeholder='Phone'
+                                onChange={handlePhoneChange}
+                                error={errors.phone}
+                                width='300px'
+                            />
+                        </div>
+
+                    </div>
+                </div>
+                <div className='flex flex-col gap-2'>
+                    <div className='mb-3'>
+                        <span className='text-[24px] font-helvetica text-indigo'>Emergency Contact Details</span>
+                    </div>
+                    <div className='flex flex-col md:flex-row gap-[10px]'>
+                        <OutlinedPhoneInput
+                            value={formData.emergencyContactNumber}
+                            name='emergencyContactNumber'
+                            placeholder='Emergency Contact Number'
+                            onChange={handlePhoneChange}
+                            error={errors.emergencyContactNumber}
+                        />
+                        <OutlinedInput type='text' value={formData.insuranceNumber} name='insuranceNumber' placeholder='Insurance Number' onChange={handleChange} width='300px' error={errors.insuranceNumber} />
                     </div>
                 </div>
                 <div className='flex flex-col gap-2'>
@@ -234,7 +283,7 @@ const CustomizeTour = () => {
                 <button
                     type='submit'
                     disabled={status === 'sending'}
-                    className='bg-indigo text-white px-4 py-2 rounded-full disabled:opacity-60 disabled:cursor-not-allowed'
+                    className='bg-indigo text-white px-4 py-4 rounded-full disabled:opacity-60 disabled:cursor-not-allowed font-bold pointer-cursor'
                 >
                     {status === 'sending' ? 'Sending...' : 'Submit'}
                 </button>
